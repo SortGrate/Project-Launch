@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--'<b style="color:#000066;" This Is THE Place For You!></b>'-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SortGrate - Join Us!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .grid-container {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: white;
+            background-image: 
+                linear-gradient(rgba(0, 100, 255, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 100, 255, 0.4) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(800px) rotateX(60deg) scale(1.2);
+            animation: warpEffect 5s infinite linear alternate;
+        }
+
+        @keyframes warpEffect {
+            0% { transform: perspective(800px) rotateX(60deg) scale(1.2) translateX(0) translateY(0); }
+            50% { transform: perspective(800px) rotateX(50deg) scale(1.1) translateX(-10px) translateY(10px); }
+            100% { transform: perspective(800px) rotateX(60deg) scale(1.2) translateX(0) translateY(0); }
+        }
+
+        .content {
+            position: absolute;
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row-reverse;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 100, 255, 0.8), 
+                         0 0 20px rgba(0, 100, 255, 0.6), 
+                         0 0 30px rgba(0, 100, 255, 0.4);
+            margin: 0;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            color: rgba(250, 150, 9, 1);
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .description-container {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: black;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            min-height: 200px;
+        }
+
+        .join-btn {
+            display: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+            color: white;
+            background: rgba(23, 34, 248, 0.8);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 100, 255, 0.8);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .join-btn:hover {
+            background: rgba(0, 100, 255, 1);
+            box-shadow: 0 0 20px rgba(0, 100, 255, 1);
+        }
+
+        @keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 100, 255, 0.8);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 100, 255, 1);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 100, 255, 0.8);
+    }
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            width: 80%;
+            max-width: 600px;
+            height: 80%;
+        }
+
+        .popup iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .close-btn {
+            margin-top: 10px;
+            padding: 10px;
+            background: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container"></div>
+
+    <div class="content">
+        <div class="header">
+            <img src="logoai.jpg" alt="SortGrate Logo" class="logo">
+            <h1>SortGrate</h1>
+        </div>
+        <p class="tagline">The ONLY Place for ALL your <i>"Academic"</i> Stuffs - Sorted, Arranged and <br> Waiting for YOU!</p>
+        <div class="description-container" id="description-container"></div> 
+        <button class="join-btn" onclick="openPopup()" id="join-btn">Join Us Now!</button>
+    </div>
+
+    <div class="popup" id="popup">
+        <span class="popup-close" onclick="closePopup()">&times;</span>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe50RoUOhFtWA-jf5MZsZSoKcoHrZEeQf_wMtOuh36uTryawg/viewform?usp=sharing"></iframe>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        const lines = [
+            '<i><b style="color:#FF5733;">&#11162;</b> Are you interested in creating <b style="color:#2980B9;">Mesmerizing Contents?</b> </i>',
+            '<i><b style="color:#FF5733;">&#11162;</b> Are you an expert in <b style="color:#27AE60;">LaTeX?</b> </i>',
+            '<i><b style="color:#FF5733;">&#11162;</b> Do you want to weave magic in <b style="color:#8E44AD;">Developing a Webpage?</b> </i>',
+            '<i><b style="color:#FF5733;">&#11162;</b> Are you a pro in <b style="color:#F1C40F;">Publicity?</b> </i>',
+            '<i><b style="color:#FF5733;">&#11162;</b> Do you have other <b style="color:#E74C3C;">Amazing Skills</b> that you want to put to practice?</i>',
+            '<b style="color:#000066; font-size: 1.3rem">This Is THE Place For You!</b>'
+        ];
+
+        let index = 0;
+        function typeEffect(line, callback) {
+            let p = document.createElement('p');
+            document.getElementById('description-container').appendChild(p);
+            let i = 0;
+            function typing() {
+                if (i < line.length) {
+                    p.innerHTML = line.substring(0, i + 1);
+                    i++;
+                    setTimeout(typing, 50);
+                } else {
+                    callback();
+                }
+            }
+            typing();
+        }
+        function showNextLine() {
+            if (index < lines.length) {
+                typeEffect(lines[index], () => { index++; setTimeout(showNextLine, 1000); });
+            } else {
+                document.getElementById('join-btn').style.display = 'inline-block';
+            }
+        }
+        function openPopup() { document.getElementById('popup').style.display = 'block'; }
+        function closePopup() { document.getElementById('popup').style.display = 'none'; }
+        showNextLine();
+    </script>
+</body>
+</html>
